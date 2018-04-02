@@ -7,10 +7,6 @@
 
 }
 
-
-html{
-    font-size: 2vmin;
-}
 body{
     width: 100vw;
     height: 100vh;
@@ -18,6 +14,10 @@ body{
     background-color: black;
     font-size: 0;
     user-select: none;
+}
+
+html{
+    font-size: 2vmin;
 }
 
 #container {
@@ -83,7 +83,7 @@ body{
     width: 33.333%;
     height: 20%;
     display: inline-block;
-    font-size: 2rem;
+    font-size: 2vw;
     border-color: black;
     font-family: -apple-system;
 }
@@ -92,7 +92,7 @@ body{
     width: 66.666%;
     height: 20%;
     display: inline-block;
-    font-size: 2rem;
+    font-size: 2vw;
     border-color: black;
 }
 
