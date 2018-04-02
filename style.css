@@ -1,0 +1,105 @@
+
+
+
+@font-face {
+    font-family: digitalCalc;
+    src: url("digital-7.regular.ttf");
+
+}
+
+
+html{
+    font-size: 2vmin;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    font-size: 0;
+    user-select: none;
+}
+
+#container {
+    height: 60%;
+    width: 20%;
+    box-sizing: border-box;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+
+
+}
+
+#input{
+
+    display:inline-block;
+    color: black;
+    width: 100%;
+    height:83.333%;
+}
+
+#display {
+
+    width: 100%;
+    height: 20%;
+    display:inline-block;
+    border: 2px solid black;
+    font-size: 1.9rem;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 2%;
+    font-family: digitalCalc;
+}
+
+
+#operatorBar {
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+}
+
+#operatorBar > *{
+    width: 100%;
+    height: 20%;
+    display: inline-block;
+    font-size: 2rem;
+    border-color: black;
+    background-color: #909090;
+    font-family: -apple-system;
+}
+
+#integerBox {
+    width: 75%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+
+#integerBox > *{
+    width: 33.333%;
+    height: 20%;
+    display: inline-block;
+    font-size: 2rem;
+    border-color: black;
+    font-family: -apple-system;
+}
+
+#integerZero{
+    width: 66.666%;
+    height: 20%;
+    display: inline-block;
+    font-size: 2rem;
+    border-color: black;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active{
+    filter: invert(100%);
+}
