@@ -123,7 +123,7 @@ function equalsClicked() {
             }
         }
     }
-    if (screen[0] === 1/0){
+    if (screen[0] === 1/0 || isNaN(screen[0])){
         screen = 'ERROR'
     }
     $('#display').html(screen);

@@ -7,6 +7,22 @@
 
 }
 
+button {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    background-color: white;
+    display: inline-block;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+
 body{
     width: 100vw;
     height: 100vh;
@@ -20,7 +36,7 @@ html{
     font-size: 2vmin;
 }
 
-#container {
+/* #container {
     height: 60%;
     width: 20%;
     box-sizing: border-box;
@@ -32,31 +48,32 @@ html{
 
 
 
-}
+} */
 
-#input{
+/* #input{
 
     display:inline-block;
     color: black;
     width: 100%;
     height:83.333%;
-}
+} */
 
 #display {
 
-    width: 100%;
-    height: 20%;
+    height: 50px;
+    width: 200px;
     display:inline-block;
-    border: 2px solid black;
-    font-size: 1.9rem;
+    border: 1px solid black;
+    background-color: white;
     box-sizing: border-box;
     text-align: center;
+    font-size: 2vmin;
     padding-top: 2%;
     font-family: digitalCalc;
 }
 
 
-#operatorBar {
+/* #operatorBar {
     width: 25%;
     height: 100%;
     display: inline-block;
@@ -77,9 +94,9 @@ html{
     height: 100%;
     display: inline-block;
     float: left;
-}
+} */
 
-#integerBox > *{
+/* #integerBox > *{
     width: 33.333%;
     height: 20%;
     display: inline-block;
@@ -87,13 +104,9 @@ html{
     border-color: black;
     font-family: -apple-system;
 }
-
+ */
 #integerZero{
-    width: 66.666%;
-    height: 20%;
-    display: inline-block;
-    font-size: 2vw;
-    border-color: black;
+    width: 100px;
 }
 
 button:focus {
