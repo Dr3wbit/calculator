@@ -21,13 +21,25 @@ $(document).ready(function() {
 });
 
 function clickedNumber(){
-
+    
     if (this.innerHTML === 'C') {
         clearAll();
         return;
     }
     else if (this.innerHTML === 'DEL'){
         screen.splice(-1,1)
+    }
+    else if (this.innerHTML === 'CE'){
+        var lastInput = screen[screen.length-1];
+        if (screen[screen.length-1] === ""){
+            screen.pop();
+        }
+        if (screen.length === 0 || lastInput === undefined){
+            return
+        }else{
+            screen[screen.length-1] = screen[screen.length-1].slice(0,-1);
+        }
+
     }
     else if (typeof screen[0] === 'number' && screen.length === 1) {
         clearAll();
