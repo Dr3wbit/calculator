@@ -7,6 +7,7 @@ function clearAll(){
     screen = [];
     repeatOperation=[];
     decimalUsed = false;
+    $('.mathdisplay').remove();
     $('#display').html(screen);
 
 }
@@ -95,33 +96,31 @@ function decimalClicked(){
 function equalsClicked() {
     var doMathPEMDAS = [];
     var returnValue = [];
-    var i = 0;
     if (screen.length >= 3) {
-        for (i=0; i<=screen.length-1; i++) {
+        for (var i=0; i<=screen.length-1; i++) {
             if (screen[i] === '^') {
                 doMathPEMDAS = screen.splice(i - 1, 3, 'placeHolder');
-                returnValue = Math.pow(doMathPEMDAS[0], doMathPEMDAS[2]);
+                returnValue = doMath(doMathPEMDAS[0], doMathPEMDAS[1], doMathPEMDAS[2]);
                 screen[i - 1] = returnValue;
             }
         }
-        for (i=0; i<=screen.length-1; i++){
+        for (var i=0; i<=screen.length-1; i++){
             if(screen[i] === '*' || screen[i] === '/' ){
                 doMathPEMDAS = screen.splice(i-1, 3, 'placeHolder');
                 returnValue = doMath(doMathPEMDAS[0], doMathPEMDAS[1], doMathPEMDAS[2]);
                 screen[i-1] = returnValue;
             }
         }
-        for (i=0; i<=screen.length-1; i++){
+        for (var i=0; i<=screen.length-1; i++){
             if(screen[i] === '+' || screen[i] === '-' ) {
                 doMathPEMDAS = screen.splice(i - 1, 3, 'placeHolder');
                 returnValue = doMath(doMathPEMDAS[0], doMathPEMDAS[1], doMathPEMDAS[2]);
-                if (isNaN(returnValue)){
-                     screen = 'ERROR';
-                }else {
-                    screen[i - 1] = returnValue;
-                }
+                screen[i - 1] = returnValue;
             }
         }
+    }
+    if (screen.length >= 2){
+        equalsClicked();
     }
     if (screen[0] === 1/0 || isNaN(screen[0])){
         screen = 'ERROR'
@@ -154,16 +153,29 @@ function doMath(num1, opp, num2) {
     var output;
     switch(opp) {
         case '+':
-            output = parseFloat(num1) + parseFloat(num2);
+            output = (parseFloat(num1) + parseFloat(num2)).toFixed(2);
             break;
         case '-':
-            output = parseFloat(num1) - parseFloat(num2);
+            output = (parseFloat(num1) - parseFloat(num2)).toFixed(2);
             break;
         case '/':
-            output = parseFloat(num1) / parseFloat(num2);
+            output = (parseFloat(num1) / parseFloat(num2)).toFixed(2);
             break;
         case '*':
-            output = parseFloat(num1) * parseFloat(num2);
+            output = (parseFloat(num1) * parseFloat(num2)).toFixed(2);
+            break;
+        case '^':
+            output = Math.pow(parseFloat(num1), parseFloat(num2)).toFixed(2);
+            break;
     }
-    return output;
+    if(isNaN(output)){
+        return output;
+    }
+    var maths = ($('<div>', {
+        class: "mathdisplay",
+        text: `${num1} ${opp} ${num2} = ${output}`
+    }));
+
+    $('#side-display1').append(maths)
+    return parseFloat(output);
 }

@@ -13,8 +13,11 @@ button {
 
 .container {
   height: 50%;
-  max-width: 350px;
-  min-width: 350px;
+}
+
+#calculator {
+    max-width: 350px;
+    min-width: 290px;
 }
 
 
@@ -54,10 +57,24 @@ button:active{
     filter: invert(100%);
 }
 
-#side-screen{
-    height: 350px;
-    width: 200px;
-    background-color: aqua;
-    font-size: 2vmin
+#side-display1{
+    font-size: 1em;
+    color: red;
+}
 
+.mathdisplay {
+    position: relative;
+    animation-name: floatIn;
+    animation-duration: 1s;
+}
+
+@keyframes floatIn {
+    0%   {
+        transform: translate(50px, -150px);
+        opacity: 0.1
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 0.9
+    }
 }
