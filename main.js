@@ -12,7 +12,7 @@ function clearAll(){
 }
 
 $(document).ready(function() {
-    $(".btn").on('click', clickedNumber);
+    $(".nonoperator").on('click', clickedNumber);
     $(".operator").on('click', clickedOperator);
     $(".decimal").on('click', decimalClicked);
     $(".equals").on('click', equalsClicked);
