@@ -16,7 +16,7 @@ button {
 }
 
 #calculator {
-    max-width: 350px;
+    max-width: 320px;
     min-width: 320px;
 }
 
@@ -29,6 +29,8 @@ body{
     background-color: black;
     user-select: none;
     color: black;
+    overflow: hidden;
+    overflow-y: auto
 }
 
 #display {
@@ -70,11 +72,14 @@ button:active{
 
 @keyframes floatIn {
     0%   {
-        transform: translate(50px, -150px);
-        opacity: 0.1
+        transform: translate(300px, -300px);
+        transform: rotate(90deg);
+        opacity: 0.1;
+        font-size: 0.1em
     }
     100% {
         transform: translate(0px, 0px);
-        opacity: 0.9
+        opacity: 0.9;
+        font-size: 1em
     }
 }
