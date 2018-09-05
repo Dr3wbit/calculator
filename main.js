@@ -31,8 +31,9 @@ function keyPressHandeler(keyPress) {
 }
 
 function checkKeyPress(key) {
-    return (key >= '0' && key <= '9') || key == '+' || key == '^' || key == '*' || key == '-' ||
-        key == '.' || key == '/' || key == '=' || key == 'Backspace' || key == 'Enter';
+    return /[0-9]|=|\+|\^|\*|\-|\.|\/|Backspace|Enter/.test(key)
+    // (key >= '0' && key <= '9') || key == '+' || key == '^' || key == '*' || key == '-' ||
+    //     key == '.' || key == '/' || key == '=' || key == 'Backspace' || key == 'Enter';
 }
 
 
