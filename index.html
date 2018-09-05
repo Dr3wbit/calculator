@@ -9,16 +9,16 @@
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <script src="redesign.js"></script>
+    <script src="main.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="row header text-center Header">Use the keyboard or click the buttons to start calculating!</div>
+        <div class="row header text-center d-none d-md-block">Use your keyboard or click the buttons to start calculating!</div>
         <div class="row calculatorContainer">
-            <div class="col-md" id="leftSideDisplay"></div>
-            <div class="col-md container calculator">
+            <div class="col-md d-none d-lg-block" id="leftSideDisplay"></div>
+            <div class="col-md d-block d-lg-block container calculator">
                 <div class="row">
                     <div class="align-middle" id="display"></div>
                 </div>
@@ -26,13 +26,13 @@
                     <button value="Backspace" class="btn-outline-light nonoperator clear">CE</button>
                     <button value="C" class="btn-outline-light nonoperator clear">C</button>
                     <button value="^" class="btn-outline-light operator">^</button>
-                    <button value="/" class="btn-outline-light operator">/</button>
+                    <button value="/" class="btn-outline-light operator">&divide</button>
                 </div>
                 <div class="row">
                     <button value="9" class="btn-outline-light nonoperator integer">9</button>
                     <button value="8" class="btn-outline-light nonoperator integer">8</button>
                     <button value="7" class="btn-outline-light nonoperator integer">7</button>
-                    <button value="*" class="btn-outline-light operator">*</button>
+                    <button value="*" class="btn-outline-light operator">&times</button>
                 </div>
                 <div class="row">
                     <button value="6" class="btn-outline-light nonoperator integer">6</button>
@@ -52,7 +52,7 @@
                     <button value="Enter" class="btn-outline-light operator equals">=</button>
                 </div>
             </div>
-            <div class="col-md" id="rightSideDisplay"></div>
+            <div class="col-lg d-block d-lg-block" id="rightSideDisplay"></div>
         </div>
     </div>
     </div>

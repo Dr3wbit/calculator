@@ -1,141 +1,138 @@
 
 let screen = [];
-let repeatOperation = [];
+let lastOperation = '';
+let lastOpperand = '';
 let decimalUsed = false;
+let equalsUsed = false;
 
 function clearAll() {
     screen = [];
-    repeatOperation = [];
+    lastOperation = '';
+    lastOpperand = '';
     decimalUsed = false;
+    equalsUsed = false;
     $('.mathdisplay').remove();
-    $('#display').html(screen);
+}
+
+function updateScreen() {
+    if (screen[0] === Infinity){
+        $('#display').html("ERROR");
+        clearAll();
+        $('.mathdisplay').remove();
+    }
+    else if ($('#display')[0].innerText === "ERROR" || screen[0] === undefined) {
+        $('#display').html(0)
+    }else{
+        $('#display').html(screen);
+    }
 }
 
 $(document).ready(function () {
     $(window).on('keydown', (event) => { keyPressHandeler(event.key) })
-    $(".nonoperator").on('click', entryHandler);
-    $(".operator").on('click', clickedOperator);
-    $(".decimal").on('click', decimalClicked);
-    $(".equals").on('click', equalsClicked);
+    $(".nonoperator, .operator, .decimal, .equals").on('mousedown', entryHandler);
 });
 
 function keyPressHandeler(keyPress) {
     let keyValue = checkKeyPress(keyPress);
     if (keyValue) {
-        if (isNaN(keyPress) && keyPress !== '.' && keyPress !== 'Backspace') {
-            clickedOperator(keyPress);
-        } else {
-            entryHandler(keyPress);
-        }
+        entryHandler(keyPress)
     }
 }
 
 function checkKeyPress(key) {
     return /[0-9]|=|\+|\^|\*|\-|\.|\/|Backspace|Enter/.test(key)
-    // (key >= '0' && key <= '9') || key == '+' || key == '^' || key == '*' || key == '-' ||
-    //     key == '.' || key == '/' || key == '=' || key == 'Backspace' || key == 'Enter';
 }
-
 
 function entryHandler(keyEntry) {
-    let entry
-    if (keyEntry.type !== 'click') {
+    let entry = null;
+    if (keyEntry.type !== 'mousedown') {
         entry = keyEntry;
     } else {
-        entry = this.innerText;
+        entry = this.value;
     }
+    switch (entry) {
+        case 'C':
+            clearAll();
+            break;
+        case ('Backspace'):
+            if (screen.length === 1){
+                screen[0] = 0
+            }else{
+                screen.splice(-1, 1)
+            }
+            break;
+        case '.':
+            decimalClicked(entry);
+            break;
+        case 'Enter':
+            equalsClicked();
+            break;
+        default:
+            if ($.isNumeric(entry)) {
+                numberHandler(entry);
+            } else {
+                operatorHandler(entry);
+            }
+    }
+    updateScreen();
+}
 
-    if (entry === 'C') {
-        clearAll();
-        return;
+function numberHandler(number) {
+    if (equalsUsed === true){
+        screen = [];
     }
-    else if (entry === 'CE' || entry === 'Backspace') {
-        screen.splice(-1, 1)
+    if (screen[0] === "0"){
+        screen[0] = number;
     }
-    else if (typeof screen[0] === 'number' && screen.length === 1) {
-        clearAll();
-        screen.push(entry);
-    }
-    else if (entry === '.') {
-        decimalClicked();
-        return;
-    }
-    else if (screen.length >= 0) {
+    else if(screen.length >= 0) {
         if (isNaN(screen[screen.length - 1])) {
-            screen.push(entry);
+            screen.push(number);
         } else {
-            screen[screen.length - 1] = screen[screen.length - 1] + entry;
+            screen[screen.length - 1] = screen[screen.length - 1] + number;
         }
     }
-    $('#display').html(screen);
+    lastOpperand = screen[screen.length - 1];
+    equalsUsed = false;
 }
 
-function extraOperatorRemoval(){
-    if (screen.length === 2 && isNaN(screen[screen.length - 1])) {
-        screen.pop();
-    }
-}
-
-function clickedOperator(keyEntry) {
+function operatorHandler(opperator) {
     extraOperatorRemoval();
-
-    let oppEntry
-    if (keyEntry.type !== 'click') {
-        oppEntry = keyEntry;
-    } else {
-        oppEntry = this.innerText;
-    }
     decimalUsed = false;
-
-    if ((oppEntry === '=' || oppEntry === 'Enter') && screen.length >= 3) {
-        oppEntry === '=';
-        equalsClicked();
-        $('#display').html(screen);
-    }
-
-    else if ((oppEntry === '=' || oppEntry === 'Enter') && screen.length === 3) {
-        oppEntry === '=';
-            repeatOperation.push(screen[0]);
-            repeatOperation.push(screen[1]);
-            repeatOperation.push(screen[0]);
-        specialEqualsClickedOperation();
-        $('#display').html(screen);
-    }
-
-    else if (isNaN(screen[screen.length - 1])) {
-        screen[screen.length - 1] = oppEntry;
-        $('#display').html(screen);
-
+    if (isNaN(screen[screen.length - 1])) {
+        screen[screen.length - 1] = opperator;
     } else {
-        screen.push(oppEntry);
-        $('#display').html(screen);
+        screen.push(opperator);
     }
+    lastOperation = opperator;
+    equalsUsed = false;
 }
 
-function decimalClicked() {
-    let lastNum = "";
+function decimalClicked(decimal) {
     if (decimalUsed === true) {
         return;
     } else {
-        lastNum = screen[screen.length - 1];
-        if (lastNum === undefined || isNaN(lastNum)) {
-            screen.push(0 + '.');
-            $('#display').html(screen);
+        let lastEntry = screen[screen.length - 1];
+        if (lastEntry === undefined || isNaN(lastEntry)) {
+            screen.push(0 + decimal);
             decimalUsed = true;
-            return;
+        } else {
+            screen.splice(-1, 1);
+            screen.push(lastEntry + decimal);
+            decimalUsed = true;
         }
-        screen.splice(-1, 1);
-        screen.push(lastNum + '.');
-        decimalUsed = true;
-        $('#display').html(screen);
     }
 }
 
 function equalsClicked() {
+    equalsUsed = true;
     let doMathPEMDAS = [];
     let returnValue = [];
-    extraOperatorRemoval();
+    if ((lastOpperand || lastOperation) === "") {
+        return;
+    }
+    checkForSpecialOperation();
     if (screen.length >= 3) {
+        extraOperatorRemoval();
         for (let i = 0; i <= screen.length - 1; i++) {
             if (screen[i] === '^') {
                 doMathPEMDAS = screen.splice(i - 1, 3, 'placeHolder');
@@ -158,36 +155,31 @@ function equalsClicked() {
             }
         }
     }
-    if (screen.length > 2) {
+    if (screen.length >= 3) {
         equalsClicked();
     }
-    if (screen[0] === 1 / 0 || isNaN(screen[0])) {
-        screen = 'ERROR'
-    }
-    $('#display').html(screen);
 }
 
-function specialEqualsClickedOperation() {
-
-    if (screen.length === 1 && repeatOperation.length >= 2) {
-        screen[0] = doMath(screen[0], repeatOperation[1], repeatOperation[2]);
-    }
-    else if (screen.length === 1) {
-        screen[0] = screen[0];
-    }
-    else if (screen[1] === '^') {
-        screen = Math.pow(screen[0], screen[0]);
-    }
-    else if (screen.length === 2) {
-        screen = [doMath(screen[0], screen[1], screen[0])];
-    }
-    else if (screen.length === 0 || screen[0] === 0) {
-        screen[0] = 0;
-
-    } else {
-        screen = 'ERROR';
+function extraOperatorRemoval() {
+    if (isNaN(screen[screen.length - 1])) {
+        screen.pop();
+        lastOperation = screen[screen.length - 2]
     }
 }
+
+function checkForSpecialOperation() {
+    let returnValue = [];
+    if (screen.length <= 2) {
+        returnValue = doMath(screen[0], lastOperation, lastOpperand);
+        if (returnValue === undefined) {
+            return;
+        } else {
+            screen.pop()
+            screen[0] = returnValue;
+        }
+    }
+}
+
 function doMath(num1, opp, num2) {
     let output;
     switch (opp) {
@@ -210,24 +202,27 @@ function doMath(num1, opp, num2) {
     if (isNaN(output)) {
         return output;
     }
+    appendMathHistory(num1,opp,num2,output);
+    return parseFloat(output);
+}
+
+function appendMathHistory(num1,opp,num2,output){
     let maths = ($('<div>', {
         class: "mathdisplay",
         text: `${num1} ${opp} ${num2} = ${output}`
     }));
     let historyLimit = $('div.mathdisplay').length;
-    if (historyLimit > 14) {
+    if (historyLimit > 17) {
         $('#rightSideDisplay').children().last().remove();
     }
-
     $('#rightSideDisplay').prepend(maths)
     changeColor();
-    return parseFloat(output);
 }
 
 function changeColor() {
     let lastCalculation = $('#rightSideDisplay').children()[0].innerHTML;
-    let answerColorChanger = lastCalculation.replace(/\=.*/g, (answer) => {
-        return answer.fontcolor('gold')
+    let answerColorChanger = lastCalculation.replace(/[^=]*$/, (answer) => {
+        return answer.fontcolor('gold');
     })
     $('#rightSideDisplay').children()[0].innerHTML = answerColorChanger;
 }
