@@ -9,52 +9,50 @@
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <script src="main.js"></script>
+    <script src="redesign.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="row" style="height: 15vh"></div>
-        <div class="row">
-            <div class="col-md"></div>
-            <div class="col-md">
-                <div class="container" id="calculator">
-                    <div class="row">
-                        <div class="" id="display"></div>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn-outline-light nonoperator clear">DEL</button>
-                        <button type="button" class="btn-outline-light nonoperator clear">C</button>
-                        <button type="button" class="btn-outline-light operator">^</button>
-                        <button type="button" class="btn-outline-light operator">/</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn-outline-light nonoperator integer">9</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">8</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">7</button>
-                        <button type="button" class="btn-outline-light operator">*</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn-outline-light nonoperator integer">6</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">5</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">4</button>
-                        <button type="button" class="btn-outline-light operator">+</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn-outline-light nonoperator integer">3</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">2</button>
-                        <button type="button" class="btn-outline-light nonoperator integer">1</button>
-                        <button type="button" class="btn-outline-light operator">-</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" id="integerZero" class="btn-outline-light nonoperator">0</button>
-                        <button type="button" class="btn-outline-light nonoperator integer decimal">.</button>
-                        <button type="button" class="btn-outline-light operator equals">=</button>
-                    </div>
+        <div class="row header text-center Header">Use the keyboard or click the buttons to start calculating!</div>
+        <div class="row calculatorContainer">
+            <div class="col-md" id="leftSideDisplay"></div>
+            <div class="col-md container calculator">
+                <div class="row">
+                    <div class="align-middle" id="display"></div>
+                </div>
+                <div class="row">
+                    <button value="Backspace" class="btn-outline-light nonoperator clear">CE</button>
+                    <button value="C" class="btn-outline-light nonoperator clear">C</button>
+                    <button value="^" class="btn-outline-light operator">^</button>
+                    <button value="/" class="btn-outline-light operator">/</button>
+                </div>
+                <div class="row">
+                    <button value="9" class="btn-outline-light nonoperator integer">9</button>
+                    <button value="8" class="btn-outline-light nonoperator integer">8</button>
+                    <button value="7" class="btn-outline-light nonoperator integer">7</button>
+                    <button value="*" class="btn-outline-light operator">*</button>
+                </div>
+                <div class="row">
+                    <button value="6" class="btn-outline-light nonoperator integer">6</button>
+                    <button value="5" class="btn-outline-light nonoperator integer">5</button>
+                    <button value="4" class="btn-outline-light nonoperator integer">4</button>
+                    <button value="+" class="btn-outline-light operator">+</button>
+                </div>
+                <div class="row">
+                    <button value="3" class="btn-outline-light nonoperator integer">3</button>
+                    <button value="2" class="btn-outline-light nonoperator integer">2</button>
+                    <button value="1" class="btn-outline-light nonoperator integer">1</button>
+                    <button value="-" class="btn-outline-light operator">-</button>
+                </div>
+                <div class="row">
+                    <button value="0" id="integerZero" class="btn-outline-light nonoperator">0</button>
+                    <button value="." class="btn-outline-light nonoperator integer decimal">.</button>
+                    <button value="Enter" class="btn-outline-light operator equals">=</button>
                 </div>
             </div>
-            <div class="col-md" id="side-display1"></div>
+            <div class="col-md" id="rightSideDisplay"></div>
         </div>
     </div>
     </div>

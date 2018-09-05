@@ -1,48 +1,53 @@
 
+body{
+    width: 100vw;
+    height: 100vh;
+    font-size: 4vmin;
+    background-color: black;
+    user-select: none;
+    color: black;
+    overflow: hidden;
+    overflow-y: auto;
+}
 
 @font-face {
     font-family: digitalCalc;
     src: url("digital-7.regular.ttf");
-
 }
 
 button {
     width: 25%;
     height: 10vh;
+    user-select: none;
 }
 
 .container {
-  height: 50%;
+    height: 100%;
+    width: 100%;
 }
 
-#calculator {
+.calculator {
     max-width: 320px;
     min-width: 320px;
 }
 
-
-body{
-    width: 100vw;
-    height: 100vh;
-    font-size: 2em;
-    margin: 0;
-    background-color: black;
-    user-select: none;
-    color: black;
-    overflow: hidden;
-    overflow-y: auto
+.Header {
+    height: 15%;
+    font-size: 3vmin;
+    color: red;
+    display: block;
+    margin: auto;
 }
 
 #display {
-
     height: 15vh;
     width: 100%;
     border: 1px solid black;
     background-color: white;
     box-sizing: border-box;
     text-align: center;
-    padding-top: 2%;
-    font-size: 1.5em;
+    padding-top: 10%;
+    font-size: 4vmin;
     font-family: digitalCalc;
     word-wrap: break-word;
 }
@@ -52,19 +57,26 @@ body{
 }
 
 button:focus {
-    outline: none;
+    outline: 0;
 }
 
 button:active{
     filter: invert(100%);
 }
 
-#side-display1{
-    font-size: 1em;
+#rightSideDisplay{
+    font-size: 2.5vmin;
     color: red;
+    display: block;
+    overflow-x: hidden;
 }
 
 .mathdisplay {
+    width: 100%;
+    display: block;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     position: relative;
     animation-name: floatIn;
     animation-duration: 1s;
@@ -72,14 +84,15 @@ button:active{
 
 @keyframes floatIn {
     0%   {
-        transform: translate(300px, -300px);
-        transform: rotate(90deg);
         opacity: 0.1;
-        font-size: 0.1em
+        font-size: 0.01vmin
+    }
+    50% {
+        opacity: 0.5;
+        font-size: 3vmin
     }
     100% {
-        transform: translate(0px, 0px);
         opacity: 0.9;
-        font-size: 1em
+        font-size: 2.5vmin
     }
 }
