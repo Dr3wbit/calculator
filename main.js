@@ -15,7 +15,7 @@ function clearAll() {
 }
 
 function updateScreen() {
-    if (screen[0] === Infinity){
+    if (screen[0] === Infinity || screen[0] === "NaN"){
         $('#display').html("ERROR");
         clearAll();
         $('.mathdisplay').remove();
@@ -81,7 +81,7 @@ function numberHandler(number) {
     if (equalsUsed === true){
         screen = [];
     }
-    if (screen[0] === "0"){
+    if (screen[0] === "0" && screen.length < 2 ){
         screen[0] = number;
     }
     else if(screen.length >= 0) {
@@ -157,7 +157,7 @@ function equalsClicked() {
     }
     if (screen.length >= 3) {
         equalsClicked();
-    }
+    } 
 }
 
 function extraOperatorRemoval() {
