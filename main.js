@@ -56,10 +56,11 @@ function entryHandler(keyEntry) {
             break;
         case ('Backspace'):
             if (screen.length === 1){
-                screen[0] = 0
+                screen = []
             }else{
                 screen.splice(-1, 1)
             }
+            decimalUsed = false;
             break;
         case '.':
             decimalClicked(entry);
